@@ -8,7 +8,7 @@
         <mat-list>
           @for (n of diagram.nodes; track $index) {
             <mat-list-item>
-              <mat-icon matListItemIcon color="primary">lens</mat-icon>
+              <mat-icon class="node-point" matListItemIcon color="primary">lens</mat-icon>
               <div matListItemTitle>{{ n.id }} — {{ n.name }} ( {{ n.type }} )</div>
             </mat-list-item>
           }
@@ -24,7 +24,6 @@
         <mat-list>
           @for (e of diagram.edges; track $index) {
             <mat-list-item>
-<!--              <mat-icon matListItemIcon color="accent">arrow_right_alt</mat-icon>-->
               <div matListItemTitle>{{ e.from }} → {{ e.to }}</div>
             </mat-list-item>
           }
