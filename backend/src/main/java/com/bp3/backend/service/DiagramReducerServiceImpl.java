@@ -1,10 +1,10 @@
 package com.bp3.backend.service;
 
-import com.bp3.backend.domain.Diagram;
-import com.bp3.backend.domain.NodeType;
-import com.bp3.backend.domain.edge.BpmEdge;
-import com.bp3.backend.domain.edge.Edge;
-import com.bp3.backend.domain.node.Node;
+import com.bp3.backend.model.domain.Diagram;
+import com.bp3.backend.model.domain.NodeType;
+import com.bp3.backend.model.domain.edge.BpmEdge;
+import com.bp3.backend.model.domain.edge.Edge;
+import com.bp3.backend.model.domain.node.Node;
 import com.bp3.backend.exception.InvalidDiagramException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,21 +24,13 @@ public class DiagramReducerServiceImpl implements DiagramReducerService {
         List<Node> nodes = diagram.getNodes();
         validateDiagram(diagram);
 
-        Set<String> allowedNodeIds = nodes.stream()
-                .filter(n -> n.getType() == NodeType.START
-                        || n.getType() == NodeType.END
-                        || n.getType() == NodeType.HUMAN_TASK)
-                .map(Node::getId)
-                .collect(Collectors.toSet());
+        Set<String> allowedNodeIds = filterNodes(nodes);
 
         List<Node> filteredNodes = nodes.stream()
                 .filter(n -> allowedNodeIds.contains(n.getId()))
                 .toList();
 
-        Map<String, List<String>> adjacency = new HashMap<>();
-        for (Edge edge : diagram.getEdges()) {
-            adjacency.computeIfAbsent(edge.getFrom(), k -> new ArrayList<>()).add(edge.getTo());
-        }
+        Map<String, List<String>> adjacency = createAdjacency(diagram);
 
         Set<Edge> newEdges = new HashSet<>();
         for (String nodeId : allowedNodeIds) {
@@ -66,6 +58,23 @@ public class DiagramReducerServiceImpl implements DiagramReducerService {
         if (!hasStart || !hasEnd) {
             throw new InvalidDiagramException("Diagram must contain at least one START and one END node");
         }
+    }
+
+    private Map<String, List<String>> createAdjacency(Diagram diagram) {
+        Map<String, List<String>> adjacency = new HashMap<>();
+        for (Edge edge : diagram.getEdges()) {
+            adjacency.computeIfAbsent(edge.getFrom(), k -> new ArrayList<>()).add(edge.getTo());
+        }
+        return adjacency;
+    }
+
+    private Set<String> filterNodes(List<Node> nodes) {
+        return nodes.stream()
+                .filter(n -> n.getType() == NodeType.START
+                        || n.getType() == NodeType.END
+                        || n.getType() == NodeType.HUMAN_TASK)
+                .map(Node::getId)
+                .collect(Collectors.toSet());
     }
 
     private void buildEdges(String start, String current,

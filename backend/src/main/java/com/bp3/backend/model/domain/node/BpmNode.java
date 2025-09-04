@@ -1,6 +1,6 @@
-package com.bp3.backend.domain.node;
+package com.bp3.backend.model.domain.node;
 
-import com.bp3.backend.domain.NodeType;
+import com.bp3.backend.model.domain.NodeType;
 import java.util.Objects;
 
 public class BpmNode implements Node {

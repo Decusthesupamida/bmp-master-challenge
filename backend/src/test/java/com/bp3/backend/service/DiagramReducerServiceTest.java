@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.bp3.backend.domain.Diagram;
-import com.bp3.backend.domain.NodeType;
-import com.bp3.backend.domain.edge.Edge;
-import com.bp3.backend.domain.node.Node;
+import com.bp3.backend.model.domain.Diagram;
+import com.bp3.backend.model.domain.NodeType;
+import com.bp3.backend.model.domain.edge.Edge;
+import com.bp3.backend.model.domain.node.Node;
 import com.bp3.backend.exception.InvalidDiagramException;
 import java.util.ArrayList;
 import java.util.List;

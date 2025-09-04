@@ -1,6 +1,6 @@
-package com.bp3.backend.domain.edge;
+package com.bp3.backend.model.domain.edge;
 
-import com.bp3.backend.domain.node.Node;
+import com.bp3.backend.model.domain.node.Node;
 
 /**
  * Public contract for a class that plays the role of a edge between two {@link Node}s within

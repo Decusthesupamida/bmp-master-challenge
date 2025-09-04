@@ -1,9 +1,9 @@
-package com.bp3.backend.domain;
+package com.bp3.backend.model.domain;
 
-import com.bp3.backend.domain.edge.BpmEdge;
-import com.bp3.backend.domain.edge.Edge;
-import com.bp3.backend.domain.node.BpmNode;
-import com.bp3.backend.domain.node.Node;
+import com.bp3.backend.model.domain.edge.BpmEdge;
+import com.bp3.backend.model.domain.edge.Edge;
+import com.bp3.backend.model.domain.node.BpmNode;
+import com.bp3.backend.model.domain.node.Node;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.List;
 
@@ -16,9 +16,6 @@ public class Diagram {
     public Diagram(List<Node> nodes, List<Edge> edges) {
         this.nodes = nodes;
         this.edges = edges;
-    }
-
-    public Diagram() {
     }
 
     public List<Node> getNodes() {

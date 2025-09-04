@@ -1,6 +1,6 @@
-package com.bp3.backend.domain;
+package com.bp3.backend.model.domain;
 
-import com.bp3.backend.domain.node.Node;
+import com.bp3.backend.model.domain.node.Node;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**

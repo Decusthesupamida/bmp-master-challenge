@@ -1,6 +1,6 @@
-package com.bp3.backend.domain.node;
+package com.bp3.backend.model.domain.node;
 
-import com.bp3.backend.domain.NodeType;
+import com.bp3.backend.model.domain.NodeType;
 
 /**
  * Public contract for a class that plays the role of a node within a BPM process diagram.

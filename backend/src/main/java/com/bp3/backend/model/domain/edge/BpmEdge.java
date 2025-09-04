@@ -1,4 +1,4 @@
-package com.bp3.backend.domain.edge;
+package com.bp3.backend.model.domain.edge;
 
 import java.util.Objects;
 
