@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {DiagramDto} from "./models/diagram.dto";
 import {DiagramService} from "./service/diagram.service";
 import {CommonModule} from "@angular/common";
@@ -14,7 +14,7 @@ import {
 import {MatDivider} from "@angular/material/divider";
 import {DiagramViewerComponent} from "./components/diagram-viewer/diagram-viewer.component";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
-import {MatIcon, MatIconModule} from "@angular/material/icon";
+import {MatIconModule} from "@angular/material/icon";
 import {finalize} from "rxjs";
 
 @Component({
@@ -29,12 +29,13 @@ import {finalize} from "rxjs";
     DiagramViewerComponent,
     MatIconModule,
     MatCardHeader, MatProgressSpinner,
-    MatIcon, MatCardContent,
+    MatCardContent,
     MatCardTitle,
     MatCardSubtitle
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   title = 'frontend';

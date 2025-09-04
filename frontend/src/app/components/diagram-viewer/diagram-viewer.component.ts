@@ -1,10 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {DiagramDto} from "../../models/diagram.dto";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatList, MatListItem} from "@angular/material/list";
 import {Edge, NgxGraphModule, Node} from "@swimlane/ngx-graph";
 import {CommonModule, NgIf} from "@angular/common";
-import {MatIcon, MatIconModule} from "@angular/material/icon";
+import {MatIconModule} from "@angular/material/icon";
 import {MatLine} from "@angular/material/core";
 
 @Component({
@@ -19,17 +19,20 @@ import {MatLine} from "@angular/material/core";
     NgxGraphModule,
     MatIconModule,
     NgIf,
-    MatIcon,
     MatLine,
     MatCardHeader,
     MatCardContent
   ],
   templateUrl: './diagram-viewer.component.html',
-  styleUrl: './diagram-viewer.component.scss'
+  styleUrl: './diagram-viewer.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DiagramViewerComponent {
   nodes: Node[] = [];
   links: Edge[] = [];
+
+  trackNode = (_: number, n: Node) => n.id;
+  trackEdge = (_: number, e: Edge) => `${e.source}-${e.target}-${e.id}`;
 
   private _diagram?: DiagramDto;
 
@@ -52,7 +55,7 @@ export class DiagramViewerComponent {
   private transformDataForGraph(diagram: DiagramDto): void {
     this.nodes = diagram.nodes.map(n => ({
       id: String(n.id),
-      label: n.name,
+      label: n.name || String(n.id),
       number: +n.id
     }));
 
