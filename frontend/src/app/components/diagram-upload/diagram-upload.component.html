@@ -1,0 +1,40 @@
+<mat-card class="upload-container">
+  <mat-card-header>
+    <mat-card-title>Load Diagram Data</mat-card-title>
+    <mat-card-subtitle>Paste JSON or upload a file, then click Process</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-form-field class="json-textarea" appearance="outline">
+      <textarea
+        matInput
+        rows="10"
+        [(ngModel)]="rawJson"
+        placeholder=" e.g., { &quot;nodes&quot;: [...], &quot;edges&quot;: [...] }"
+      ></textarea>
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button mat-stroked-button (click)="fileInput.click()">
+      <mat-icon>upload_file</mat-icon>
+      Upload File
+    </button>
+    <input #fileInput type="file" (change)="onFileSelected($event)" hidden accept=".json" />
+
+    @if (isDataLoaded) {
+      <button
+        mat-stroked-button
+        color="warn"
+        (click)="onResetClick()">
+        <mat-icon>delete_sweep</mat-icon>
+        Reset
+      </button>
+    }
+
+    <button mat-flat-button color="primary" [disabled]="!rawJson" (click)="processDiagram()">
+      <mat-icon>play_arrow</mat-icon>
+      Process
+    </button>
+  </mat-card-actions>
+</mat-card>

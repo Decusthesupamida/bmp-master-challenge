@@ -1,0 +1,59 @@
+<ng-container *ngIf="diagram; else noData">
+  <div class="diagram-view-container">
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>Nodes ({{ diagram.nodes?.length || 0 }})</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="list-content">
+        <mat-list>
+          @for (n of diagram.nodes; track $index) {
+            <mat-list-item>
+              <mat-icon matListItemIcon color="primary">lens</mat-icon>
+              <div matListItemTitle>{{ n.id }} — {{ n.name }} ( {{ n.type }} )</div>
+            </mat-list-item>
+          }
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>Edges ({{ diagram.edges?.length || 0 }})</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="list-content">
+        <mat-list>
+          @for (e of diagram.edges; track $index) {
+            <mat-list-item>
+<!--              <mat-icon matListItemIcon color="accent">arrow_right_alt</mat-icon>-->
+              <div matListItemTitle>{{ e.from }} → {{ e.to }}</div>
+            </mat-list-item>
+          }
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="graph-card">
+      <mat-card-header>
+        <mat-card-title>Graph Visualization</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="graph-wrapper">
+        <ngx-graph
+          [nodes]="nodes"
+          [links]="links"
+          [layout]="'dagre'"
+          [autoZoom]="true"
+          [autoCenter]="true"
+        >
+        </ngx-graph>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-container>
+
+<ng-template #noData>
+  <div class="empty-state">
+    <mat-icon class="empty-state__icon">search_off</mat-icon>
+    <h2 class="empty-state__title">No Diagram Data Available</h2>
+    <p class="empty-state__text">The diagram data is missing or has not been loaded yet.</p>
+  </div>
+</ng-template>

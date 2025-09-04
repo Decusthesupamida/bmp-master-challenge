@@ -1,0 +1,102 @@
+@use '@angular/material' as mat;
+
+:host {
+  --app-gap: 1.5rem;
+  --app-padding: 1.5rem;
+  --app-border-radius: 12px;
+  --app-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-gap);
+  padding: var(--app-padding);
+}
+
+.upload-card,
+.diagram-card {
+  border-radius: var(--app-border-radius);
+  box-shadow: var(--app-card-shadow);
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.upload-card {
+  background-color: #fcfcfc;
+}
+
+.results-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--app-gap);
+}
+
+.stateful-content {
+  min-height: 250px;
+  color: #666;
+}
+
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  mat-icon {
+    transform: scale(1.5);
+  }
+}
+
+.error-state {
+  color: mat.get-color-from-palette(mat.$red-palette, 500);
+  background-color: rgba(mat.get-color-from-palette(mat.$red-palette, 50), 0.5);
+  border-radius: var(--app-border-radius);
+  width: 100%;
+
+  code {
+    background-color: rgba(0,0,0,0.05);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+}
+
+.placeholder-state {
+  mat-icon {
+    color: #bdbdbd;
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  text-align: center;
+  border: 2px dashed #e0e0e0;
+  border-radius: var(--app-border-radius);
+  color: #757575;
+  margin-top: var(--app-gap);
+
+  &__icon {
+    font-size: 4rem;
+    width: 4rem;
+    height: 4rem;
+    color: #bdbdbd;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    margin: 0.5rem 0;
+    font-weight: 500;
+  }
+}

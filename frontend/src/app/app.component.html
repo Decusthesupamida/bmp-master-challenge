@@ -1,0 +1,61 @@
+<mat-card class="upload-card">
+  <mat-card-header>
+    <mat-card-title>Diagram Processing</mat-card-title>
+    <mat-card-subtitle>Upload a JSON file to visualize and reduce it</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <app-diagram-upload
+      (diagramParsed)="onDiagramParsed($event)"
+      (resetRequested)="resetState()"
+      [isDataLoaded]="!!sourceDiagram">
+    </app-diagram-upload>
+  </mat-card-content>
+</mat-card>
+
+<div class="results-layout" *ngIf="sourceDiagram">
+  <mat-card class="diagram-card">
+    <mat-card-header>
+      <mat-card-title>Source Diagram</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-diagram-viewer [diagram]="sourceDiagram"></app-diagram-viewer>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="diagram-card">
+    <mat-card-header>
+      <mat-card-title>Reduced Diagram</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="stateful-content">
+      @if (isLoading) {
+        <div class="state-container">
+          <mat-spinner diameter="50"></mat-spinner>
+          <p>Reducing diagram...</p>
+        </div>
+      }
+
+      @if (error) {
+        <div class="state-container error-state">
+          <mat-icon color="warn">error_outline</mat-icon>
+          <p>An error occurred:</p>
+          <code>{{ error }}</code>
+        </div>
+      }
+
+      @if (!isLoading && !error && reducedDiagram) {
+        <app-diagram-viewer
+          [diagram]="reducedDiagram">
+        </app-diagram-viewer>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>
+
+@if (!sourceDiagram && !isLoading && !error) {
+  <div class="empty-state">
+    <mat-icon class="empty-state__icon">cloud_upload</mat-icon>
+    <h2>Awaiting File</h2>
+    <p>Please upload a diagram in JSON format to begin.</p>
+  </div>
+}
+

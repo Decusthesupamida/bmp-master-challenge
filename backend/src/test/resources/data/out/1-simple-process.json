@@ -1,0 +1,11 @@
+{
+  "nodes": [
+    { "id": 0, "name": "Start", "type": "START" },
+    { "id": 2, "name": "B", "type": "HUMAN_TASK" },
+    { "id": 5, "name": "End", "type": "END" }
+  ],
+  "edges": [
+    { "from": 0, "to": 2 },
+    { "from": 2, "to": 5 }
+  ]
+}

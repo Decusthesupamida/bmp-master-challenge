@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: block;
+}
+
+.upload-container {
+  --padding: 1.5rem;
+  --gap: 1rem;
+}
+
+mat-card-header {
+  padding: var(--padding) var(--padding) 0;
+}
+
+mat-card-content {
+  padding: var(--gap) var(--padding);
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--padding) var(--padding);
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+.processing-actions {
+  display: flex;
+  gap: var(--gap);
+  flex-wrap: wrap;
+}
+
+.json-textarea {
+  width: 100%;
+
+  textarea {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
